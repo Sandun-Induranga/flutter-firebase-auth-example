@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_auth_example/features/authentication/presentation/screens/login_view.dart';
+import 'landing_view.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -12,8 +12,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginView(),
+      home: const LandingView(),
     );
   }
 }
-
