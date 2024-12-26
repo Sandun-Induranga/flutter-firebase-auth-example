@@ -3,27 +3,39 @@ import 'package:flutter/material.dart';
 import '../../data/repository/auth_repository.dart';
 import 'login_view.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
 
   @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+  String error = '';
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    bool isLoading = false;
-    String error = '';
 
     Future<void> signUp() async {
       try {
-        isLoading = true;
+        setState(() {
+          isLoading = true;
+        });
         await AuthRepository().signUpWithEmailAndPassword(
           emailController.text,
           passwordController.text,
         );
-        isLoading = false;
+        setState(() {
+          isLoading = false;
+        });
       } catch (e) {
-        isLoading = false;
-        error = e.toString();
+        setState(() {
+          isLoading = false;
+          error = e.toString();
+        });
       }
     }
 
@@ -36,24 +48,24 @@ class SignUpView extends StatelessWidget {
           child: Column(
             children: [
               const Text('Create an account'),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
                   labelText: 'Email',
                 ),
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
                   labelText: 'Password',
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  signUp();
+                onPressed: () async {
+                  await signUp();
                 },
                 child: isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? const Text('Submitting...')
                     : const Text('Sign Up'),
               ),
               InkWell(

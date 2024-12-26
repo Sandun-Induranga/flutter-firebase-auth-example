@@ -2,27 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth_example/features/authentication/data/repository/auth_repository.dart';
 import 'package:flutter_firebase_auth_example/features/authentication/presentation/screens/sign_up_view.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+  String error = '';
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    bool isLoading = false;
-    String error = '';
 
     Future<void> login() async {
       try {
-        isLoading = true;
+        setState(() {
+          isLoading = true;
+          error = '';
+        });
         await AuthRepository().signInWithEmailAndPassword(
           emailController.text,
           passwordController.text,
         );
-        isLoading = false;
+        setState(() {
+          isLoading = false;
+        });
       } catch (e) {
-        isLoading = false;
-        error = e.toString();
+        setState(() {
+          isLoading = false;
+          error = e.toString();
+        });
       }
     }
 
@@ -52,9 +65,7 @@ class LoginView extends StatelessWidget {
                   await login();
                 },
                 child: isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? const Text('Submitting...')
                     : const Text('Login'),
               ),
               InkWell(

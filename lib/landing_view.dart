@@ -14,8 +14,7 @@ class LandingView extends StatelessWidget {
       stream: AuthRepository().authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          final User? user = snapshot.data;
-          if (user == null) {
+          if (!snapshot.hasData) {
             return const LoginView();
           } else {
             return const HomeView();
