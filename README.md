@@ -1,16 +1,26 @@
-# flutter_firebase_auth_example
+# Flutter Firebase Authentication Example
 
-A new Flutter project.
+A new Flutter project which demonstrates how to implement Firebase Authentication in Flutter.
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter application.
+First, add `firebase_core` and `firebase_auth` as a dependency in your pubspec.yaml file.
 
-A few resources to get you started if this is your first Flutter project:
+```
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^0.5.0
+  firebase_auth: ^0.18.0
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Firebase Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Go to the Firebase Console.
+- Create a new project.
+- Add Android and iOS app to the project.
+- Download `google-services.json` and `GoogleService-Info.plist` files.
+- Add `google-services.json` and `GoogleService-Info.plist` files to your project.
+- Enable Email/Password Sign-in method in Firebase Authentication.
+- Run your app.
+- Done!
