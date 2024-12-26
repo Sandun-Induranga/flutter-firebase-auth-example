@@ -10,7 +10,7 @@ First, add `firebase_core` and `firebase_auth` as a dependency in your pubspec.y
 dependencies:
   flutter:
     sdk: flutter
-    firebase_core: ^3.9.0
+  firebase_core: ^3.9.0
   firebase_auth: ^5.3.4
 ```
 
